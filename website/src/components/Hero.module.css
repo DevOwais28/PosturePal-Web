@@ -1,0 +1,519 @@
+/* ── HERO SECTION ── */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 100px 24px 80px;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.gradientBg {
+  position: absolute;
+  width: 900px; height: 900px;
+  background: radial-gradient(circle, var(--violet-dim) 0%, transparent 60%);
+  right: -200px; top: -200px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── LAYOUT ── */
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 520px;
+  gap: 80px;
+  align-items: center;
+}
+
+/* ── COPY ── */
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  padding: 6px 14px 6px 10px;
+  background: var(--violet-dim);
+  border: 1px solid color-mix(in srgb, var(--violet) 25%, transparent);
+  border-radius: 99px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--violet-3);
+  letter-spacing: 0.02em;
+}
+
+.badgeDot {
+  width: 6px; height: 6px;
+  background: var(--violet);
+  border-radius: 50%;
+  animation: blink 2s ease-in-out infinite;
+  box-shadow: 0 0 8px var(--violet);
+}
+
+@keyframes blink {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.4; transform: scale(0.6); }
+}
+
+.h1 {
+  font-size: clamp(3.2rem, 6vw, 5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--text);
+}
+
+.highlight {
+  background: linear-gradient(105deg, var(--violet) 0%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.desc {
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: var(--muted);
+  max-width: 500px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, var(--violet) 0%, #6d28d9 100%);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 99px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(124,58,237,0.3);
+}
+.btnPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(124,58,237,0.45);
+}
+
+.btnOutline {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 13px 26px;
+  border: 1px solid var(--border-2);
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 99px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.btnOutline:hover {
+  border-color: rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.04);
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+.pillCheck {
+  color: var(--cyan);
+  font-weight: 800;
+}
+
+/* ── PHONE OUTER ── */
+.phoneOuter {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding: 20px 60px;
+}
+
+.aura {
+  position: absolute;
+  width: 440px; height: 440px;
+  background: radial-gradient(circle, var(--violet-glow) 0%, transparent 65%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  animation: auraPulse 4s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes auraPulse {
+  0%,100% { opacity: 0.5; transform: translate(-50%,-50%) scale(1); }
+  50%      { opacity: 1;    transform: translate(-50%,-50%) scale(1.05); }
+}
+
+/* ── PHONE SHELL ── */
+.phone {
+  width: 320px;
+  border-radius: 46px;
+  background: #000;
+  border: 2px solid #2a2a35;
+  box-shadow:
+    0 0 0 10px #09090f,
+    0 50px 100px rgba(0,0,0,0.8),
+    inset 0 1px 0 rgba(255,255,255,0.1);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.island {
+  position: absolute;
+  top: 12px; left: 50%;
+  transform: translateX(-50%);
+  width: 90px; height: 26px;
+  background: #000;
+  border-radius: 99px;
+  z-index: 20;
+}
+
+/* ── STATUS BAR ── */
+.statusBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 22px 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.8);
+  position: relative;
+  z-index: 10;
+}
+
+.statusRight {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ── APP BAR ── */
+.appBar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px 14px;
+  background: #000;
+  position: relative;
+  z-index: 10;
+}
+
+.appBarLogo {
+  width: 24px; height: 24px;
+  border-radius: 6px;
+}
+
+.appBarName {
+  font-family: var(--font-head);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  flex: 1;
+}
+
+.liveTag {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #fff;
+  background: #ef4444;
+  border-radius: 99px;
+  padding: 3px 8px;
+}
+.liveDot {
+  width: 4px; height: 4px;
+  background: #fff;
+  border-radius: 50%;
+  animation: liveBlink 1s infinite;
+}
+@keyframes liveBlink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+/* ── EXERCISE CHIP ── */
+.exerciseChip {
+  position: absolute;
+  top: 72px; left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text);
+  z-index: 10;
+}
+.exerciseIcon { font-size: 0.9rem; }
+
+/* ── CAMERA VIEW ── */
+.camView {
+  position: relative;
+  height: 340px;
+  background: #f8fafc;
+  overflow: hidden;
+}
+
+.exerciseGif {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  display: block;
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.15) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cornerTL, .cornerTR, .cornerBL, .cornerBR {
+  position: absolute;
+  width: 20px; height: 20px;
+  border-color: var(--cyan);
+  border-style: solid;
+  z-index: 2;
+  opacity: 0.7;
+}
+.cornerTL { top: 12px; left: 12px; border-width: 2px 0 0 2px; }
+.cornerTR { top: 12px; right: 12px; border-width: 2px 2px 0 0; }
+.cornerBL { bottom: 12px; left: 12px; border-width: 0 0 2px 2px; }
+.cornerBR { bottom: 12px; right: 12px; border-width: 0 2px 2px 0; }
+
+.scanLine {
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--cyan) 50%, transparent 100%);
+  animation: scanDown 2.5s linear infinite;
+  z-index: 2;
+  box-shadow: 0 0 12px var(--cyan);
+}
+
+.camLabel {
+  position: absolute;
+  bottom: 12px; left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  white-space: nowrap;
+  z-index: 3;
+  background: rgba(0,0,0,0.7);
+  padding: 4px 10px;
+  border-radius: 99px;
+  border: 1px solid rgba(0,0,0,0.9);
+}
+
+.ann {
+  position: absolute;
+  top: 50px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(8px);
+  padding: 5px 9px;
+  border-radius: 6px;
+  border: 1px solid rgba(0,0,0,0.9);
+  z-index: 3;
+}
+.annLeft  { left: 12px; }
+.annRight { right: 12px; }
+
+.annDot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+}
+
+/* ── STATS STRIP ── */
+.statsStrip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: #000;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.statBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.statNum {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1;
+}
+
+.statLbl {
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.statDivider {
+  width: 1px;
+  height: 24px;
+  background: rgba(255,255,255,0.1);
+}
+
+/* ── COACH STRIP ── */
+.coachStrip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  margin: 0 12px;
+  background: var(--violet-dim);
+  border: 1px solid color-mix(in srgb, var(--violet) 20%, transparent);
+  border-radius: 12px;
+}
+
+.coachIcon { font-size: 1rem; }
+.coachText {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--violet-3);
+  line-height: 1.3;
+}
+
+/* ── BOTTOM NAV ── */
+.bottomNav {
+  display: flex;
+  background: #000;
+  padding: 14px 4px 10px;
+  margin-top: 10px;
+}
+
+.navItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.58rem;
+  font-weight: 600;
+  color: var(--muted-2);
+  position: relative;
+}
+
+.navIcon { font-size: 1.1rem; }
+
+.navActive { color: var(--violet-2); }
+
+.navIndicator {
+  position: absolute;
+  bottom: -10px;
+  width: 16px; height: 3px;
+  background: var(--violet-2);
+  border-radius: 99px 99px 0 0;
+}
+
+/* ── FLOATERS ── */
+.floater {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.02) inset;
+  z-index: 10;
+  white-space: nowrap;
+}
+
+.floaterLeft  { left: 0; top: 32%; }
+.floaterRight { right: 0; bottom: 32%; }
+
+.floaterIconWrap {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.floaterVal { font-size: 0.9rem; font-weight: 700; color: var(--text); }
+.floaterSub { font-size: 0.7rem; color: var(--muted); margin-top: 2px; font-weight: 500; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1060px) {
+  .wrap { grid-template-columns: 1fr 480px; gap: 60px; }
+}
+
+@media (max-width: 960px) {
+  .wrap { grid-template-columns: 1fr; gap: 64px; text-align: center; }
+  .badge, .pills { margin: 0 auto; }
+  .desc { max-width: 100%; margin: 0 auto; }
+  .actions { justify-content: center; }
+  .phoneOuter { margin: 0 auto; padding: 20px 70px; }
+}
+
+@media (max-width: 560px) {
+  .phoneOuter { padding: 16px; }
+  .phone { width: 300px; }
+  .camView { height: 320px; }
+  .floater { display: none; }
+}
