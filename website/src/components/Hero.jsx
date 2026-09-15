@@ -1,51 +1,10 @@
-﻿import { useEffect, useRef } from "react"
-import { motion } from "framer-motion"
+﻿import { motion } from "framer-motion"
 import logoIcon from "../logo_icon.png"
 import s from "./Hero.module.css"
 
 export default function Hero() {
-  const canvasRef = useRef(null)
-
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext("2d")
-    let raf, t = 0
-
-    const resize = () => {
-      canvas.width = canvas.offsetWidth
-      canvas.height = canvas.offsetHeight
-    }
-    resize()
-    window.addEventListener("resize", resize)
-
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      const COLS = 22, ROWS = 12
-      const cw = canvas.width / COLS
-      const rh = canvas.height / ROWS
-      for (let c = 0; c <= COLS; c++) {
-        for (let r = 0; r <= ROWS; r++) {
-          const wave = Math.sin(t * 0.7 + c * 0.45 + r * 0.45) * 0.5 + 0.5
-          const alpha = wave * 0.15
-          ctx.beginPath()
-          ctx.arc(c * cw, r * rh, 1.3, 0, Math.PI * 2)
-          ctx.fillStyle = `rgba(167,139,250,${alpha})`
-          ctx.fill()
-        }
-      }
-      t += 0.025
-      raf = requestAnimationFrame(draw)
-    }
-    draw()
-    return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", resize) }
-  }, [])
-
   return (
-    <section className={s.hero}>
-      <canvas ref={canvasRef} className={s.canvas} aria-hidden />
-      <div className={s.gradientBg} />
-
+    <section className={`${s.hero} meshBg`}>
       <div className={s.wrap}>
         {/* ── LEFT COPY ── */}
         <div className={s.copy}>
@@ -55,8 +14,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <span className={s.badgeDot} />
-            AI-Powered · Fully Offline · Android
+            Offline AI Personal Trainer
           </motion.div>
 
           <motion.h1
@@ -65,9 +23,8 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.08 }}
           >
-            Your AI trainer.
-            <br />
-            <span className={s.highlight}>Always on you.</span>
+            Train smarter.<br />
+            <span className={s.highlight}>Anywhere.</span>
           </motion.h1>
 
           <motion.p
@@ -77,8 +34,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.18 }}
           >
             PosturePal watches your form through the camera, counts reps automatically,
-            and coaches you in real time — in English or Urdu. No internet. No gym.
-            Just you and your AI coach.
+            and coaches you in real time. No internet required.
           </motion.p>
 
           <motion.div
@@ -88,31 +44,11 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.27 }}
           >
             <a href="#download" className={s.btnPrimary}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                <path d="M12 16l-5-5h3V4h4v7h3l-5 5z"/>
-                <path d="M5 20h14v-2H5v2z"/>
-              </svg>
               Get Early Access
             </a>
             <a href="#features" className={s.btnOutline}>
               See Features
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
             </a>
-          </motion.div>
-
-          <motion.div
-            className={s.pills}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.36 }}
-          >
-            {["100% Offline", "On-Device AI", "English & Urdu", "No Subscription"].map(p => (
-              <span key={p} className={s.pill}>
-                <span className={s.pillCheck}>✓</span> {p}
-              </span>
-            ))}
           </motion.div>
         </div>
 
@@ -123,9 +59,6 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
         >
-          {/* Aura glow behind phone */}
-          <div className={s.aura} />
-
           {/* Phone shell */}
           <div className={s.phone}>
             {/* Dynamic island style notch */}
@@ -135,14 +68,8 @@ export default function Hero() {
             <div className={s.statusBar}>
               <span className={s.statusTime}>9:41</span>
               <div className={s.statusRight}>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" opacity="0.7">
-                  <path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3a4.237 4.237 0 00-6 0zm-4-4l2 2a7.074 7.074 0 0110 0l2-2C15.14 9.14 8.87 9.14 5 13z"/>
-                </svg>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" opacity="0.7">
-                  <rect x="2" y="7" width="20" height="11" rx="2" ry="2" stroke="currentColor" strokeWidth="1.5" fill="none"/>
-                  <rect x="4" y="9" width="14" height="7" rx="1" fill="currentColor" opacity="0.8"/>
-                  <path d="M23 11v3a1 1 0 000-3z" fill="currentColor"/>
-                </svg>
+                <span className={s.statusIcon}>📶</span>
+                <span className={s.statusIcon}>🔋</span>
               </div>
             </div>
 
@@ -150,10 +77,7 @@ export default function Hero() {
             <div className={s.appBar}>
               <img src={logoIcon} alt="" className={s.appBarLogo} />
               <span className={s.appBarName}>PosturePal</span>
-              <span className={s.liveTag}>
-                <span className={s.liveDot} />
-                LIVE
-              </span>
+              <span className={s.liveTag}>LIVE</span>
             </div>
 
             {/* Exercise name chip */}
@@ -164,37 +88,24 @@ export default function Hero() {
 
             {/* ── CAMERA VIEW ── */}
             <div className={s.camView}>
-              {/* The GIF — mix-blend-mode:screen removes white bg */}
               <img
                 src="/Burpee and Jump Exercise.gif"
                 alt="AI exercise pose tracking"
                 className={s.exerciseGif}
               />
-
-              {/* Vignette overlay */}
-              <div className={s.vignette} />
-
-              {/* Corner brackets */}
               <div className={s.cornerTL} />
               <div className={s.cornerTR} />
               <div className={s.cornerBL} />
               <div className={s.cornerBR} />
 
-              {/* Scan line */}
-              <div className={s.scanLine} />
-
-              {/* Annotation badges */}
               <div className={`${s.ann} ${s.annLeft}`}>
-                <span className={s.annDot} style={{background:"#22c55e", boxShadow:"0 0 6px #22c55e"}} />
+                <span className={s.annDot} style={{background:"#000"}} />
                 Back straight
               </div>
               <div className={`${s.ann} ${s.annRight}`}>
-                <span className={s.annDot} style={{background:"var(--cyan)", boxShadow:"0 0 6px var(--cyan)"}} />
+                <span className={s.annDot} style={{background:"#495057"}} />
                 Form: good
               </div>
-
-              {/* AI label */}
-              <div className={s.camLabel}>AI Pose Tracking Active</div>
             </div>
 
             {/* ── STATS STRIP ── */}
@@ -203,14 +114,12 @@ export default function Hero() {
                 <span className={s.statNum}>12</span>
                 <span className={s.statLbl}>Reps</span>
               </div>
-              <div className={s.statDivider} />
               <div className={s.statBlock}>
-                <span className={s.statNum} style={{color:"var(--cyan)"}}>94%</span>
+                <span className={s.statNum}>94%</span>
                 <span className={s.statLbl}>Form</span>
               </div>
-              <div className={s.statDivider} />
               <div className={s.statBlock}>
-                <span className={s.statNum} style={{color:"#22c55e"}}>🔥 3</span>
+                <span className={s.statNum}>3</span>
                 <span className={s.statLbl}>Sets</span>
               </div>
             </div>
@@ -232,36 +141,10 @@ export default function Hero() {
                 <div key={label} className={`${s.navItem} ${active ? s.navActive : ""}`}>
                   <span className={s.navIcon}>{icon}</span>
                   <span>{label}</span>
-                  {active && <div className={s.navIndicator} />}
                 </div>
               ))}
             </div>
           </div>
-
-          {/* ── FLOATING CARDS ── */}
-          <motion.div
-            className={`${s.floater} ${s.floaterLeft}`}
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 3.4, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <div className={s.floaterIconWrap} style={{background:"rgba(124,58,237,0.15)"}}>🔥</div>
-            <div>
-              <div className={s.floaterVal}>12 Reps</div>
-              <div className={s.floaterSub}>Perfect form · Burpee</div>
-            </div>
-          </motion.div>
-
-          <motion.div
-            className={`${s.floater} ${s.floaterRight}`}
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.7 }}
-          >
-            <div className={s.floaterIconWrap} style={{background:"rgba(34,211,238,0.12)"}}>⚡</div>
-            <div>
-              <div className={s.floaterVal}>Form: 94%</div>
-              <div className={s.floaterSub}>AI confidence score</div>
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </section>
