@@ -1,25 +1,36 @@
+import { useState } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import TechBar from './components/TechBar'
 import Features from './components/Features'
-import HowItWorks from './components/HowItWorks'
-import Screens from './components/Screens'
-import Download from './components/Download'
-import FAQ from './components/FAQ'
+import Walkthrough from './components/Walkthrough'
+import DownloadFAQ from './components/DownloadFAQ'
 import Footer from './components/Footer'
+import LegalModal from './components/LegalModal'
 
 export default function App() {
+  const [legalOpen, setLegalOpen] = useState(false)
+  const [legalTab, setLegalTab] = useState('privacy')
+
+  const handleOpenLegal = (tab = 'privacy') => {
+    setLegalTab(tab)
+    setLegalOpen(true)
+  }
+
   return (
-    <>
-      <Navbar />
-      <Hero />
-      <TechBar />
-      <Features />
-      <HowItWorks />
-      <Screens />
-      <Download />
-      <FAQ />
-      <Footer />
-    </>
+    <div className="min-h-screen bg-[#090B10] text-white selection:bg-sky-500/30 selection:text-sky-200">
+      <Navbar onOpenLegal={handleOpenLegal} />
+      <main>
+        <Hero />
+        <Features />
+        <Walkthrough />
+        <DownloadFAQ />
+      </main>
+      <Footer onOpenLegal={handleOpenLegal} />
+      <LegalModal
+        isOpen={legalOpen}
+        onClose={() => setLegalOpen(false)}
+        initialTab={legalTab}
+      />
+    </div>
   )
 }
